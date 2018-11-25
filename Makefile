@@ -17,7 +17,7 @@
 CXX = g++
 CPPFLAGS += -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/grpcpp
 CXXFLAGS += -std=c++11
-LDFLAGS += -L/usr/local/lib -LC:/msys64/mingw64/lib -lprotobuf -lgrpc++ -Wl,--no-as-needed
+LDFLAGS += -L/usr/local/lib -LC:/msys64/mingw64/lib -lprotobuf -lgrpc++ -lgpr -Wl,--no-as-needed
 
 PROTOC = protoc
 GRPC_CPP_PLUGIN = grpc_cpp_plugin.exe
@@ -27,12 +27,21 @@ PROTOS_PATH = ../../protos
 
 vpath %.proto $(PROTOS_PATH)
 
-all: greeter_client greeter_server 
+all: greeter_client greeter_server greeter_async_client greeter_async_client2 greeter_async_server
 
 greeter_client: helloworld.pb.o helloworld.grpc.pb.o greeter_client.o
 	$(CXX) $^ $(LDFLAGS) -o $@
 
 greeter_server: helloworld.pb.o helloworld.grpc.pb.o greeter_server.o
+	$(CXX) $^ $(LDFLAGS) -o $@
+
+greeter_async_client: helloworld.pb.o helloworld.grpc.pb.o greeter_async_client.o
+	$(CXX) $^ $(LDFLAGS) -o $@
+
+greeter_async_client2: helloworld.pb.o helloworld.grpc.pb.o greeter_async_client2.o
+	$(CXX) $^ $(LDFLAGS) -o $@
+
+greeter_async_server: helloworld.pb.o helloworld.grpc.pb.o greeter_async_server.o
 	$(CXX) $^ $(LDFLAGS) -o $@
 
 .PRECIOUS: %.grpc.pb.cc
