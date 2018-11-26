@@ -1,5 +1,7 @@
 install grpc on mingw64
 
+$ pacman -Sy mingw-w64-x86_64-openssl
+
 $ pacman -Sy mingw-w64-x86_64-grpc
 
 (1/4) installing mingw-w64-x86_64-c-ares                                             
@@ -13,6 +15,7 @@ $ last step is 'make'
 
 
 References:
+
 https://www.cnblogs.com/qq952693358/p/6942354.html
 https://github.com/eliben/code-for-blog/blob/master/2016/grpc-stringdb/tester_client.py
 https://grpc.io/docs/quickstart/python.html
